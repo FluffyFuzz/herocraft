@@ -1,20 +1,95 @@
 import * as THREE from 'three';
-console.log("Object THREE",THREE);
+
+import { FBXLoader } from 'three/addons/loaders/FBXLoader.js';
+import { TGALoader } from 'three/addons/loaders/TGALoader.js';
 
 
+
+//Gestionnaire de chargement
+const manager = new THREE.LoadingManager();
+//Chargeur de fichiers TGA
+const tgaLoader = new TGALoader(manager);
+manager.addHandler(/\.tga$/i, tgaLoader);
+//Chargeur de fichiers FBX
+const loader = new FBXLoader(manager);
+//Dossier des textures
+loader.setResourcePath('./assets/mirana/materials/');
+
+
+//Création de la Scene
 const scene = new THREE.Scene();
-console.log("Objet SCENE",scene);
-console.log("scene.type",scene.type);
-console.log("scene.length",scene.children.length);
 
-const camera = new THREE.PerspectiveCamera( 75, 60 / 100, 1, 1000 );
+//Ajout lumiere ambiante
+const ambientLight = new THREE.AmbientLight(0xffffff,5);
+scene.add(ambientLight);
+//Ajout lumiere directionnelle
+const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
+directionalLight.position.set(5, 10, 7);
+scene.add(directionalLight);
+
+//Chargement du personnage mirana
+const object = await loader.loadAsync('./assets/mirana/mirana_econ.fbx');
+scene.add(object);
+console.log("Personnage chargé :", object);
+
+//Ajoute une box3 pour delimiter mirana
+const box = new THREE.Box3().setFromObject(object);
+console.log(box);
+// Récupérer les dimensions
+const size = box.getSize(new THREE.Vector3());
+console.log("Dimensions :", size);
+// Récupérer le centre
+const center = box.getCenter(new THREE.Vector3());
+console.log("Centre :", center)
+object.position.x = -center.x;
+object.position.y = -center.y;
+object.position.z = -center.z;
+object.rotation.y = 1;
+
+
+//Creation et ajout de la camera
+const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1000 );
 scene.add( camera );
-
-console.log("Camera object : ",camera);
-camera.position.z =10;
+camera.position.z = size.y * 2 ;
 camera.lookAt(0,0,0);
 
-const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+
+//Creation de l'object 3D (geometry + material = mesh)
+const geometry = new THREE.BoxGeometry( 5, 1, 6 );
+const material = new THREE.MeshBasicMaterial({color: 0x0080ff});
 const cube = new THREE.Mesh( geometry, material );
+cube.rotation.y = 2;
+cube.rotation.z = -20;
+cube.rotation.x = -20;
 scene.add( cube );
+
+//Generation du rendu 3D sur écran 2D
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize(800,600);
+document.body.appendChild( renderer.domElement );
+renderer.render( scene, camera );
+
+
+//Ajout animation par rapport au Delta
+const clock = new THREE.Clock();
+function animate(){
+const Delta = clock.getDelta() * 2;
+cube.rotation.x +=Delta;
+renderer.render(scene, camera);
+requestAnimationFrame(animate);
+}
+
+//Resize en cas de changement de taille de la fenetre 
+function onWindowResize(){
+const wininnerWidth = window.innerWidth;
+const wininnerHeight = window.innerHeight;
+camera.aspect = wininnerWidth/wininnerHeight;
+camera.updateProjectionMatrix();
+renderer.setSize(wininnerWidth,wininnerHeight);
+}
+
+
+
+animate();
+onWindowResize();
+window.addEventListener('resize', onWindowResize);
