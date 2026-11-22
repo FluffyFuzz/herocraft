@@ -1,12 +1,70 @@
-body{
-    margin: 0;
+    /* ===== HEROCRAFT ===== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&display=swap');
+
+:root {
+    --or: #d4b36a;
+    --or-pale: #f1e2b5;
+    --texte: #e6e0d0;
+    --bordure: #6b5a3a;
 }
 
+/* Fond sombre */
+body {
+    min-height: 100vh;
+    padding: 30px 40px;
+    background:
+        radial-gradient(ellipse at center, #1c1c1a 0%, #0d0d0c 60%, #000 100%);
+    background-attachment: fixed;
+    color: var(--texte);
+    font-family: 'Cinzel', 'Palatino Linotype', Georgia, serif;
+}
+
+/* Panneaux (les deux listes) */
+ul {
+    list-style: none;
+    max-width: 480px;
+    margin: 0 0 30px;
+    padding: 20px 28px;
+    background: rgba(0, 0, 0, 0.45);
+    border: 1px solid var(--bordure);
+    box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.8);
+}
+
+/* Titre doré, à la Elden Ring ;) */
+h2 {
+    margin: 0 0 16px;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: linear-gradient(180deg, var(--or-pale), var(--or) 60%, #8a6d34);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Chaque ligne : texte à gauche, champ à droite (là où on ecris), trait fin dessous */
+li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+label {
+    letter-spacing: 0.05em;
+}   
+
+
+/* Preview Personnage */
 canvas {
     display: block;
 }
-
 .characterPreview {
   width: 400px;
   height: 500px;
 }
+
