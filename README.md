@@ -26,6 +26,8 @@ Nous avons décidé de développer un site web de création de personnage inspir
 herocraft
 ├── index.html
 ├── readme.md
+└── css/
+    ├── style.css
 └── js/
     ├── main.js
 └── assets/
