@@ -1,7 +1,12 @@
 body{
-    margin: 1;
+    margin: 0;
 }
 
 canvas {
     display: block;
+}
+
+.characterPreview {
+  width: 400px;
+  height: 500px;
 }

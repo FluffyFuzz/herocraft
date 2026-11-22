@@ -3,6 +3,9 @@ import * as THREE from 'three';
 import { FBXLoader } from 'three/addons/loaders/FBXLoader.js';
 import { TGALoader } from 'three/addons/loaders/TGALoader.js';
 
+// Récupérer la zone HTML réservée au personnage
+const preview = document.querySelector('#characterPreview');
+
 
 
 //Gestionnaire de chargement
@@ -48,11 +51,15 @@ object.rotation.y = 1;
 
 
 //Creation et ajout de la camera
-const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1000 );
-scene.add( camera );
-camera.position.z = size.y * 2 ;
-camera.lookAt(0,0,0);
-
+const camera = new THREE.PerspectiveCamera(
+  40,
+  preview.clientWidth / preview.clientHeight,
+  1,
+  1000
+);
+scene.add(camera);
+camera.position.z = size.y * 2;
+camera.lookAt(0, 0, 0);
 
 //Creation de l'object 3D (geometry + material = mesh)
 const geometry = new THREE.BoxGeometry( 5, 1, 6 );
@@ -63,29 +70,31 @@ cube.rotation.z = -20;
 cube.rotation.x = -20;
 scene.add( cube );
 
+
 //Generation du rendu 3D sur écran 2D
 const renderer = new THREE.WebGLRenderer();
-renderer.setSize(800,600);
-document.body.appendChild( renderer.domElement );
+renderer.setSize(preview.clientWidth,preview.clientHeight);
+preview.appendChild(renderer.domElement);
 renderer.render( scene, camera );
-
 
 //Ajout animation par rapport au Delta
 const clock = new THREE.Clock();
 function animate(){
-const Delta = clock.getDelta() * 2;
-cube.rotation.x +=Delta;
+const Delta = clock.getDelta() * 1;
+object.rotation.y +=Delta;
 renderer.render(scene, camera);
 requestAnimationFrame(animate);
 }
 
 //Resize en cas de changement de taille de la fenetre 
-function onWindowResize(){
-const wininnerWidth = window.innerWidth;
-const wininnerHeight = window.innerHeight;
-camera.aspect = wininnerWidth/wininnerHeight;
-camera.updateProjectionMatrix();
-renderer.setSize(wininnerWidth,wininnerHeight);
+function onWindowResize() {
+  const width = preview.clientWidth;
+  const height = preview.clientHeight;
+
+  camera.aspect = width / height;
+  camera.updateProjectionMatrix();
+
+  renderer.setSize(width, height);
 }
 
 
