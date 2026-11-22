@@ -22,18 +22,92 @@ Documentation -> https://threejs.org/manual/#installation
 </head>
 
 <body class="...">
+    <!-- Partie à gauche : -->
     <ul id="ul-caracteristiques"> <!-- Ce sera pas nécesserement des "label", souvent ça va etre une liste de choix, changer plus tard au besoin -->
+        <h2>Caractéristiques du personnage</h2>
+        <!-- Premièrement, les stats sans allocation des points de stats : -->
         <li>
-            <label for="classe">Classe du personnage</label> 
+            <label for="classe">Classe</label> 
         </li>
         <li>
             <label for="nom-complet">Prénom et Nom</label>
         </li>
         <li>
-            
+            <label for="sexe">Sexe</label>
+        </li>
+        <li>
+            <label for="ville-naissance">Ville de naissance</label> <!-- Les choix sont afficher comme ça : "ville, pays". Comme ça l'utilisateur choisit la ville et le pays en même temps -->
+        </li>
+        <li>
+            <label for="alignement">Alignement moral</label> <!-- Sera pas un label, plutôt un boutton que lorsqu'on clique dessus on voit un diagramme comme elui dans le word qui s'affiche dans la zone de bas de page. Et selon les valeurs choisies par l'utilisateur, le champ diffère entre héros, gentil, neutre, vicieux, villain, diabolique, etc.., quelque chose comme ça -->
+        </li>
+        <li>
+            <label for="background">Background / histoire</label> <!-- Champ dans lequel l'utilisateur peut inventer ce qu'il veut sur le background de son personnage -->
+        </li>
+        <li>
+            <label for="mana">Quantité de mana</label>
+        </li>
+        <!-- Deuxièmement, les stats où il faut répartir les points de stats : -->
+         <!-- Les personnages de certaines classes pourrait starter avec un buff dans certaine catégories (faut que ça reste équilibré) -->
+        <li>
+            <label for="aura">Aura</label> <!-- aura, charisme ou charme, faut choisir lequel est le meilleur -->
+        </li>
+         <li>
+            <label for="resistance-magique">Résistance magique</label>
+        </li>
+        <li>
+            <label for="resistance-physique">Résistance magique</label>
+        </li>
+        <li>
+            <label for="eloquence">Éloquence</label> <!-- voir si on laisse ou non, on pourrait l'inclure dans l'aura -->
+        </li>
+        <li>
+            <label for="agilite">Agilitée</label>
         </li>
 
+        <li>
+            <label for="Chance">Chance</label>
+        </li>
+        <li>
+            <label for="intelligence">Intelligence</label> <!-- on pourrait l'appeler "ruse" aussi -->
+        </li>
+        <li>
+            <label for="pickpocket">Capacité de pickpocket</label>
+        </li>
+        <li>
+            <label for="crochetage">Capacité de crochetage</label>
+        </li>
+        <li>
+            <label for="crochetage">Capacité de crochetage</label> <!-- Faut un tel nombre de points pour telle capacité, certaines capacités peuvent coûter moins chères pour telle classe. Par exemple, capacité d'escalade coûte moins cher pour assassin ou parler aux animaux coûte moins cher pour elfe-->
+        </li>
+        
     </ul>
+    <!-- Partie en bas (Stats non-modifiables directement par l'utilisateur. Ce sera pas des labels, et sûrement pas sous forme de li non-plus, à modifier) : -->
+    <li>
+        <label for="xp">Points d'XP</label> <!-- Est toutjours de 0 car tous les utilisateurs commencent à 0 -->
+    </li>
+    <li>
+        <label for="faim">Faim</label> <!-- Clarification : pas l'état actuel de la faim, plutôt la capacité maximale de la jauge de faim. Ce champ dépend strictement de la classe choisie par l'utilisateur -->
+    </li>
+    <li>
+        <label for="soif">Soif</label> <!-- Clarification : pas l'état actuel de la soif, plutôt la capacité maximale de la jauge de soif. Ce champ dépend strictement de la classe choisie par l'utilisateur -->
+    </li>
+    <li>
+        <label for="vie">Points de vie</label> <!-- Clarification : pas le nombre actuel de points de vie, plutôt le nombre de points de vie maximal. Ce champ dépend strictement de la classe choisie par l'utilisateur -->
+    </li>
+    <li>
+        <label for="discretion">Discrétion</label> <!-- Ce champ dépend strictement de la classe choisie par l'utilisateur -->
+    </li>
+    <li>
+        <label for="degats-magiques">Dégâts magiques</label> <!-- Ce champ dépend strictement de la classe choisie par l'utilisateur -->
+    </li>
+    <li>
+        <label for="degats-cac">Dégâts corps-à-corps</label> <!-- Ce champ dépend strictement de la classe choisie par l'utilisateur -->
+    </li>
+    <li>
+        <label for="degats-portee">Dégâts de portée</label> <!-- Ce champ dépend strictement de la classe choisie par l'utilisateur -->
+    </li>
+    <!-- Voir si on ajoute la partie des stats physiques (facial features, taille, pilosité, etc...) -->
     <script type="module" src="./js/main.js"></script>
 </body>
 </html>
