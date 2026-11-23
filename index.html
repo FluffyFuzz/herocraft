@@ -21,127 +21,133 @@ Documentation -> https://threejs.org/manual/#installation
     </script>
 </head>
     
-<body class="...">
-    <!-- Partie à gauche : -->
-    <ul id="ul-caracteristiques"> <!-- Ce sera pas nécesserement des "label", souvent ça va etre une liste de choix, changer plus tard au besoin -->
-        <h2>Caractéristiques du personnage</h2>
-        <!-- Premièrement, les stats sans allocation des points de stats : -->
-        <li>
-            <label for="classe">Classe</label>
-            <select id="classe" name="classe" >
-                <option value="">Selectionner vote classe</option>
-                <option value="troll_warlord">Guerrier</option>
-                <option value="spectre">Magicien</option>
-                <option value="phantom_assassin_base">Assassin</option>s
-                <option value="zuus">Nain</option>
-                <option value="keeper_of_the_light">Elfe</option>
-            </select>
-        </li>
-        <li>
-            <label for="nom-complet">Prénom et Nom</label>
-            <input type="text" id="nom-complet" name="nom-complet">
-        </li>
-        <li>
-            <label for="sexe">Sexe</label>
-            <select id="sexe" name="sexe"></select>
-        </li>
-        <li>
-            <label for="ville-naissance">Ville de naissance</label> <!-- Les choix sont afficher comme ça : "ville, pays". Comme ça l'utilisateur choisit la ville et le pays en même temps -->
-            <select id="ville-naissance" name="ville-naissance"></select>
-        </li>
-        <li>
-            <label for="alignement">Alignement moral</label> <!-- Sera pas un label, plutôt un boutton que lorsqu'on clique dessus on voit un diagramme comme elui dans le word qui s'affiche dans la zone de bas de page. Et selon les valeurs choisies par l'utilisateur, le champ diffère entre héros, gentil, neutre, vicieux, villain, diabolique, etc.., quelque chose comme ça -->
-            <button type="button" id="alignement">Choisir l'alignement</button>
-        </li>
-        <li>
-            <label for="background">Background / histoire</label> <!-- Champ dans lequel l'utilisateur peut inventer ce qu'il veut sur le background de son personnage -->
-            <textarea id="background" name="background" rows="4"></textarea>
-        </li>
-        <li>
-            <label for="mana">Quantité de mana</label>
-            <output id="mana" name="mana">0</output>
-        </li>
-        <!-- Deuxièmement, les stats où il faut répartir les points de stats : -->
-         <!-- Les personnages de certaines classes pourrait starter avec un buff dans certaine catégories (faut que ça reste équilibré) -->
-        <li>
-            <label for="aura">Aura</label> <!-- aura, charisme ou charme, faut choisir lequel est le meilleur -->
-            <input type="number" id="aura" name="aura" min="0" value="0">
-        </li>
-         <li>
-            <label for="resistance-magique">Résistance magique</label>
-            <input type="number" id="resistance-magique" name="resistance-magique" min="0" value="0">
-        </li>
-        <li>
-            <label for="resistance-physique">Résistance physique</label>
-            <input type="number" id="resistance-physique" name="resistance-physique" min="0" value="0">
-        </li>
-        <li>
-            <label for="eloquence">Éloquence</label> <!-- voir si on laisse ou non, on pourrait l'inclure dans l'aura -->
-            <input type="number" id="eloquence" name="eloquence" min="0" value="0">
-        </li>
-        <li>
-            <label for="agilite">Agilitée</label>
-            <input type="number" id="agilite" name="agilite" min="0" value="0">
-        </li>
+<body>
+    <div class="brique-gauche"></div>
 
-        <li>
-            <label for="Chance">Chance</label>
-            <input type="number" id="Chance" name="Chance" min="0" value="0">
-        </li>
-        <li>
-            <label for="intelligence">Intelligence</label> <!-- on pourrait l'appeler "ruse" aussi -->
-            <input type="number" id="intelligence" name="intelligence" min="0" value="0">
-        </li>
-        <li>
-            <label for="pickpocket">Capacité de pickpocket</label>
-            <input type="number" id="pickpocket" name="pickpocket" min="0" value="0">
-        </li>
-        <li>
-            <label for="crochetage">Capacité de crochetage</label>
-            <input type="number" id="crochetage" name="crochetage" min="0" value="0">
-        </li>
-        <li>
-            <label for="crochetage-2">Capacité de crochetage</label> <!-- Faut un tel nombre de points pour telle capacité, certaines capacités peuvent coûter moins chères pour telle classe. Par exemple, capacité d'escalade coûte moins cher pour assassin ou parler aux animaux coûte moins cher pour elfe-->
-            <input type="number" id="crochetage-2" name="crochetage-2" min="0" value="0">
-        </li>
-        
-    </ul>
-    <!-- Partie en bas (Stats non-modifiables directement par l'utilisateur. Ce sera pas des labels, et sûrement pas sous forme de li non-plus, à modifier) : -->
-    <ul id="ul-stats-fixes">
-        <li>
-            <label for="xp">Points d'XP</label> <!-- Est toutjours de 0 car tous les utilisateurs commencent à 0 -->
-            <output id="xp" name="xp">0</output>
-        </li>
-        <li>
-            <label for="faim">Faim</label> <!-- Clarification : pas l'état actuel de la faim, plutôt la capacité maximale de la jauge de faim. Ce champ dépend strictement de la classe choisie par l'utilisateur -->
-            <output id="faim" name="faim"></output>
-        </li>
-        <li>
-            <label for="soif">Soif</label> <!-- Clarification : pas l'état actuel de la soif, plutôt la capacité maximale de la jauge de soif. Ce champ dépend strictement de la classe choisie par l'utilisateur -->
-            <output id="soif" name="soif"></output>
-        </li>
-        <li>
-            <label for="vie">Points de vie</label> <!-- Clarification : pas le nombre actuel de points de vie, plutôt le nombre de points de vie maximal. Ce champ dépend strictement de la classe choisie par l'utilisateur -->
-            <output id="vie" name="vie"></output>
-        </li>
-        <li>
-            <label for="discretion">Discrétion</label> <!-- Ce champ dépend strictement de la classe choisie par l'utilisateur -->
-            <output id="discretion" name="discretion"></output>
-        </li>
-        <li>
-            <label for="degats-magiques">Dégâts magiques</label> <!-- Ce champ dépend strictement de la classe choisie par l'utilisateur -->
-            <output id="degats-magiques" name="degats-magiques"></output>
-        </li>
-        <li>
-            <label for="degats-cac">Dégâts corps-à-corps</label> <!-- Ce champ dépend strictement de la classe choisie par l'utilisateur -->
-            <output id="degats-cac" name="degats-cac"></output>
-        </li>
-        <li>
-            <label for="degats-portee">Dégâts de portée</label> <!-- Ce champ dépend strictement de la classe choisie par l'utilisateur -->
-            <output id="degats-portee" name="degats-portee"></output>
-        </li>
-    </ul>
-    <div class="characterPreview" id="characterPreview"></div>
+    <main class="principale">
+        <!-- Partie à gauche : -->
+        <ul class="box-style" id="ul-caracteristiques"> <!-- Ce sera pas nécesserement des "label", souvent ça va etre une liste de choix, changer plus tard au besoin -->
+            <h2>Caractéristiques du personnage</h2>
+            <!-- Premièrement, les stats sans allocation des points de stats : -->
+            <li>
+                <label for="classe">Classe</label>
+                <select id="classe" name="classe" >
+                    <option value="">Selectionner vote classe</option>
+                    <option value="troll_warlord">Guerrier</option>
+                    <option value="spectre">Magicien</option>
+                    <option value="phantom_assassin_base">Assassin</option>
+                    <option value="zuus">Nain</option>
+                    <option value="keeper_of_the_light">Elfe</option>
+                </select>
+            </li>
+            <li>
+                <label for="nom-complet">Prénom et Nom</label>
+                <input type="text" id="nom-complet" name="nom-complet">
+            </li>
+            <li>
+                <label for="sexe">Sexe</label>
+                <select id="sexe" name="sexe"></select>
+            </li>
+            <li>
+                <label for="ville-naissance">Ville de naissance</label> <!-- Les choix sont afficher comme ça : "ville, pays". Comme ça l'utilisateur choisit la ville et le pays en même temps -->
+                <select id="ville-naissance" name="ville-naissance"></select>
+            </li>
+            <li>
+                <label for="alignement">Alignement moral</label> <!-- Sera pas un label, plutôt un boutton que lorsqu'on clique dessus on voit un diagramme comme elui dans le word qui s'affiche dans la zone de bas de page. Et selon les valeurs choisies par l'utilisateur, le champ diffère entre héros, gentil, neutre, vicieux, villain, diabolique, etc.., quelque chose comme ça -->
+                <button type="button" id="alignement">Choisir l'alignement</button>
+            </li>
+            <li>
+                <label for="background">Background / histoire</label> <!-- Champ dans lequel l'utilisateur peut inventer ce qu'il veut sur le background de son personnage -->
+                <textarea id="background" name="background" rows="4"></textarea>
+            </li>
+            <li>
+                <label for="mana">Quantité de mana</label>
+                <output id="mana" name="mana">0</output>
+            </li>
+            <!-- Deuxièmement, les stats où il faut répartir les points de stats : -->
+            <!-- Les personnages de certaines classes pourrait starter avec un buff dans certaine catégories (faut que ça reste équilibré) -->
+            <li>
+                <label for="aura">Aura</label> <!-- aura, charisme ou charme, faut choisir lequel est le meilleur -->
+                <input type="number" id="aura" name="aura" min="0" value="0">
+            </li>
+            <li>
+                <label for="resistance-magique">Résistance magique</label>
+                <input type="number" id="resistance-magique" name="resistance-magique" min="0" value="0">
+            </li>
+            <li>
+                <label for="resistance-physique">Résistance physique</label>
+                <input type="number" id="resistance-physique" name="resistance-physique" min="0" value="0">
+            </li>
+            <li>
+                <label for="eloquence">Éloquence</label> <!-- voir si on laisse ou non, on pourrait l'inclure dans l'aura -->
+                <input type="number" id="eloquence" name="eloquence" min="0" value="0">
+            </li>
+            <li>
+                <label for="agilite">Agilitée</label>
+                <input type="number" id="agilite" name="agilite" min="0" value="0">
+            </li>
+
+            <li>
+                <label for="Chance">Chance</label>
+                <input type="number" id="Chance" name="Chance" min="0" value="0">
+            </li>
+            <li>
+                <label for="intelligence">Intelligence</label> <!-- on pourrait l'appeler "ruse" aussi -->
+                <input type="number" id="intelligence" name="intelligence" min="0" value="0">
+            </li>
+            <li>
+                <label for="pickpocket">Capacité de pickpocket</label>
+                <input type="number" id="pickpocket" name="pickpocket" min="0" value="0">
+            </li>
+            <li>
+                <label for="crochetage-2">Capacité de crochetage</label> <!-- Faut un tel nombre de points pour telle capacité, certaines capacités peuvent coûter moins chères pour telle classe. Par exemple, capacité d'escalade coûte moins cher pour assassin ou parler aux animaux coûte moins cher pour elfe-->
+                <input type="number" id="crochetage" name="crochetage" min="0" value="0">
+            </li>
+            
+        </ul>
+
+        <!-- Character preview -->
+        <div class="characterPreview" id="characterPreview"></div>  
+
+        <!-- Partie en bas (Stats non-modifiables directement par l'utilisateur. Ce sera pas des labels, et sûrement pas sous forme de li non-plus, à modifier) : -->
+        <ul class="box-style stat-box" id="ul-stats-fixes">
+            <li class="stat-list-item">
+                <label for="xp">Points d'XP</label> <!-- Est toujours de 0 car tous les utilisateurs commencent à 0 -->
+                <output id="xp" name="xp">0</output>
+            </li>
+            <li class="stat-list-item">
+                <label for="faim">Faim</label> <!-- Clarification : pas l'état actuel de la faim, plutôt la capacité maximale de la jauge de faim. Ce champ dépend strictement de la classe choisie par l'utilisateur -->
+                <output id="faim" name="faim">0</output>
+            </li>
+            <li class="stat-list-item">
+                <label for="soif">Soif</label> <!-- Clarification : pas l'état actuel de la soif, plutôt la capacité maximale de la jauge de soif. Ce champ dépend strictement de la classe choisie par l'utilisateur -->
+                <output id="soif" name="soif">0</output>
+            </li>
+            <li class="stat-list-item">
+                <label for="vie">Points de vie</label> <!-- Clarification : pas le nombre actuel de points de vie, plutôt le nombre de points de vie maximal. Ce champ dépend strictement de la classe choisie par l'utilisateur -->
+                <output id="vie" name="vie">0</output>
+            </li>
+            <li class="stat-list-item">
+                <label for="discretion">Discrétion</label> <!-- Ce champ dépend strictement de la classe choisie par l'utilisateur -->
+                <output id="discretion" name="discretion">0</output>
+            </li>
+            <li class="stat-list-item">
+                <label for="degats-magiques">Dégâts magiques</label> <!-- Ce champ dépend strictement de la classe choisie par l'utilisateur -->
+                <output id="degats-magiques" name="degats-magiques">0</output>
+            </li>
+            <li class="stat-list-item">
+                <label for="degats-cac">Dégâts corps-à-corps</label> <!-- Ce champ dépend strictement de la classe choisie par l'utilisateur -->
+                <output id="degats-cac" name="degats-cac">0</output>
+            </li>
+            <li class="stat-list-item">
+                <label for="degats-portee">Dégâts de portée</label> <!-- Ce champ dépend strictement de la classe choisie par l'utilisateur -->
+                <output id="degats-portee" name="degats-portee">0</output>
+            </li>
+        </ul>  
+    </main>
+
+    <div class="brique-droite"></div>
+    
     <!-- Voir si on ajoute la partie des stats physiques (facial features, taille, pilosité, etc...) -->
     <script type="module" src="./js/main.js"></script>
 </body>

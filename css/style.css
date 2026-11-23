@@ -9,7 +9,7 @@
     --bordure: #6b5a3a;
 }
 
-/* Fond sombre */
+/* Principale */
 body {
     min-height: 100vh;
     padding: 30px 40px;
@@ -18,13 +18,22 @@ body {
     background-attachment: fixed;
     color: var(--texte);
     font-family: 'Cinzel', 'Palatino Linotype', Georgia, serif;
+    display: flex;
+    flex-direction: row;
+}
+
+.principale {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto auto;
+    gap: 20px;
 }
 
 /* Panneaux (les deux listes) */
-ul {
+.box-style {
     list-style: none;
-    max-width: 480px;
-    margin: 0 0 30px;
+    margin: 0;
     padding: 20px 28px;
     background: rgba(0, 0, 0, 0.45);
     border: 1px solid var(--bordure);
@@ -56,15 +65,32 @@ li {
 
 label {
     letter-spacing: 0.05em;
-}   
+}
 
+/* Stat box */
+
+.stat-box {
+    grid-area: 2 / 1 / 3 / 3;
+}
+
+.stat-list-item {
+    display: flex;
+    flex-direction: row;
+}
+
+.stat-list-item * {
+    flex-grow: 1;
+}
 
 /* Preview Personnage */
 canvas {
     display: block;
 }
 .characterPreview {
-  width: 400px;
-  height: 500px;
+    align-self: center;
+    justify-self: center;
+    width: 400px;
+    height: 500px;
+    border: 1px solid var(--bordure);
 }
 
